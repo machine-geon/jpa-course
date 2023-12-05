@@ -16,25 +16,57 @@ public class Main {
 
         try {
             
-            // 생성
+            // // 비영속
             // Member member = new Member();
-            // member.setId(2L);
-            // member.setName("HelloB");
+            // member.setId(101L);
+            // member.setName("HelloJPA");
+
+            // // 영속
+            // System.out.println("=== Befor ===");
+            // em.persist(member);
+            // System.out.println("=== After ===");
+
+            // // 1차 캐시 조회
+            // Member findMember1 = em.find(Member.class, 101L);
+            // Member findMember2 = em.find(Member.class, 101L);
+
+            // // 영속 엔티티의 동일성 보장
+            // System.out.println("result = " + (findMember1 == findMember2));
+
+            // // 쓰기 지연
+            // Member member1 = new Member(150L, "A");
+            // Member member2 = new Member(160L, "B");
+            
+            // em.persist(member1);
+            // em.persist(member2);
+            // System.out.println("================");
+
+            // // dirty checking
+            // Member member = em.find(Member.class, 150L);
+            // member.setName("ZZZZZ");
+            // /** 수정에는 persist 사용 X
+            // em.persist(member); */
+            // System.out.println("================");
+
+            // // flush
+            // Member member = new Member(200L, "member200");
             // em.persist(member);
 
-            // 조회
-            // Member findMember = em.find(Member.class, 1L);
-            // System.out.println("findMemeber.id = " + findMember.getId());
-            // System.out.println("findMemeber.name = " + findMember.getName());
+            // em.flush();
 
-            // 삭제
-            // Member findMember = em.find(Member.class, 1L);
-            // em.remove(findMember);
+            // System.out.println("================");
 
-            // 수정
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
-            
+            // // 준영속
+            // Member member = em.find(Member.class, 150L);
+            // member.setName("AAAAA");
+
+            // em.detach(member);
+            // em.clear();
+
+            // Member member2 = em.find(Member.class, 150L);
+
+            // System.out.println("================");
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
